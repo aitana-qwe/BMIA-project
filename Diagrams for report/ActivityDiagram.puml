@@ -1,0 +1,26 @@
+@startuml
+start
+
+:User uploads video;
+:System analyses video;
+
+:Run DL algorithm (pose estimation);
+:Run ML analysis (seizure detection);
+:Extract timestamps of seizure windows;
+
+:Overlay keypoints on video;
+:Generate output video with keypoints;
+:Create CSV with seizure timestamps;
+
+:Display results to user;
+
+if (User wants to download video?) then (yes)
+  :Download annotated video;
+endif
+
+if (User wants to download CSV?) then (yes)
+  :Download CSV;
+endif
+
+stop
+@enduml

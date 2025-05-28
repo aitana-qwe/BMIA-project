@@ -1,0 +1,21 @@
+@startuml
+actor User
+
+rectangle "SeizCam System" {
+  usecase "Upload Video" as UC1
+  usecase "Run Analysis" as UC2
+  usecase "View Annotated Video with Timestamps" as UC3
+  usecase "Download Annotated Video" as UC4
+  usecase "Download Timestamps (CSV)" as UC5
+}
+
+User <--> UC1
+User <--> UC2 : loading circle
+User --> UC3
+User <--> UC4
+User <--> UC5
+UC3 --> UC4 : triggers
+UC3 --> UC5 : triggers
+UC1 --> UC2 : triggers
+UC2 --> UC3 : generates output
+@enduml
