@@ -1,0 +1,24 @@
+@startuml
+start
+
+:User uploads pre-recorded video (.mp4);
+
+:Pose extraction (MoveNet);
+
+:Features extraction;
+
+:ML model analysis;
+
+if (Seizure is detected?) then (Yes)
+    :Display message "Seizures detected";
+  :Display seizure timestamps;
+else (No)
+  :Display message "No seizures detected";
+endif
+
+:Overlay keypoints on video;
+
+:Present video with keypoints and download results options;
+
+stop
+@enduml

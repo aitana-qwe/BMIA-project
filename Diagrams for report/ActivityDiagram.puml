@@ -1,26 +1,30 @@
 @startuml
 start
 
-:User uploads video;
-:System analyses video;
+:User uploads pre-recorded video (.mp4);
 
-:Run DL algorithm (pose estimation);
-:Run ML analysis (seizure detection);
-:Extract timestamps of seizure windows;
+:System receives video;
+
+:System analyzes video;
+
+if (Seizure is detected?) then (Yes)
+  :Display message "Seizures detected";
+  :Display seizure timestamps;
+else (No)
+  :Display message "No seizures detected";
+endif
 
 :Overlay keypoints on video;
-:Generate output video with keypoints;
-:Create CSV with seizure timestamps;
 
-:Display results to user;
+:Present video with keypoints and download results options;
 
-if (User wants to download video?) then (yes)
-  :Download annotated video;
-endif
-
-if (User wants to download CSV?) then (yes)
-  :Download CSV;
-endif
+partition UserActions {
+  if (User downloads results?) then (Video)
+    :User downloads video with overlays;
+  elseif (User downloads results?) then (CSV)
+    :User downloads CSV file with timestamps;
+  endif
+}
 
 stop
 @enduml
